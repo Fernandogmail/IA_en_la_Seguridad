@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrusel LinkedIn - IA en Seguridad Física</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f0f0f0;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .slide {
+            width: 1080px;
+            height: 1080px;
+            background: white;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            page-break-after: always;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* FOOTER PROFESIONAL */
+        .slide-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(26, 35, 126, 0.95);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 3px solid #667eea;
+            z-index: 100;
+        }
+        
+        .footer-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .footer-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            border: 3px solid white;
+        }
+        
+        .footer-info h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+        
+        .footer-info p {
+            font-size: 11px;
+            opacity: 0.9;
+        }
+        
+        .footer-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .footer-slide-number {
+            font-size: 14px;
+            font-weight: 600;
+            background: rgba(255,255,255,0.15);
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 10px;
+            font-size: 12px;
+        }
+        
+        .footer-social span {
+            opacity: 0.9;
+        }
+        
+        /* SLIDE 1 - PORTADA */
+        .slide-1 {
+            background: linear-gradient(135deg, #1a237e 0%, #0d47a1 50%, #01579b 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 80px 80px 120px 80px;
+            position: relative;
+        }
+        
+        .slide-1::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+        }
+        
+        .slide-1 .icon {
+            font-size: 120px;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .slide-1 h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 72px;
+            font-weight: 900;
+            margin-bottom: 30px;
+            line-height: 1.1;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .slide-1 .subtitle {
+            font-size: 32px;
+            font-weight: 300;
+            margin-bottom: 60px;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .slide-1 .year-badge {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 20px;
+            font-weight: 600;
+            border: 2px solid rgba(255,255,255,0.3);
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* SLIDE 2 - ESTADÍSTICA IMPACTANTE */
+        .slide-2 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 80px 80px 120px 80px;
+        }
+        
+        .slide-2 .big-number {
+            font-size: 180px;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 40px;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .slide-2 .stat-label {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 60px;
+        }
+        
+        .slide-2 .description {
+            font-size: 28px;
+            line-height: 1.6;
+            max-width: 800px;
+            opacity: 0.95;
+        }
+        
+        /* SLIDE 3-6 - APLICACIONES */
+        .slide-app {
+            padding: 60px 80px 120px 80px;
+            background: white;
+        }
+        
+        .slide-app .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .slide-app .number {
+            font-size: 80px;
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+        
+        .slide-app .title {
+            font-size: 48px;
+            font-weight: 700;
+        }
+        
+        .slide-app .content {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .slide-app .item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .slide-app .item-icon {
+            font-size: 36px;
+            flex-shrink: 0;
+        }
+        
+        .slide-app .item-text {
+            flex: 1;
+        }
+        
+        .slide-app .item-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        
+        .slide-app .item-description {
+            font-size: 20px;
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        /* SLIDE 7 - RIESGOS (RESPONSIVE MEJORADO) */
+        .slide-risks {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 60px 60px 120px 60px;
+        }
+        
+        .slide-risks .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .slide-risks .header h2 {
+            font-size: 56px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+        
+        .slide-risks .header p {
+            font-size: 24px;
+            opacity: 0.95;
+        }
+        
+        .slide-risks .risks-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            max-width: 100%;
+        }
+        
+        .slide-risks .risk-card {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 20px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            min-height: 200px;
+        }
+        
+        .slide-risks .risk-icon {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+        
+        .slide-risks .risk-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+        
+        .slide-risks .risk-text {
+            font-size: 16px;
+            line-height: 1.5;
+            opacity: 0.95;
+            flex-grow: 1;
+        }
+        
+        /* SLIDE 8 - RECOMENDACIONES */
+        .slide-recommendations {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: #1a237e;
+            padding: 60px 80px 120px 80px;
+        }
+        
+        .slide-recommendations .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .slide-recommendations .header h2 {
+            font-size: 56px;
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+        
+        .slide-recommendations .rec-list {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .slide-recommendations .rec-item {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+        
+        .slide-recommendations .rec-number {
+            font-size: 64px;
+            font-weight: 900;
+            color: #43e97b;
+            flex-shrink: 0;
+        }
+        
+        .slide-recommendations .rec-content h3 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        
+        .slide-recommendations .rec-content p {
+            font-size: 18px;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        /* SLIDE 9 - EMPRESAS */
+        .slide-companies {
+            background: white;
+            padding: 60px 80px 120px 80px;
+        }
+        
+        .slide-companies .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .slide-companies .header h2 {
+            font-size: 48px;
+            font-weight: 900;
+        }
+        
+        .slide-companies .companies-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+        
+        .slide-companies .company-card {
+            background: #f8f9fa;
+            border-radius: 20px;
+            padding: 35px;
+            border-left: 6px solid #4facfe;
+        }
+        
+        .slide-companies .company-name {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a237e;
+            margin-bottom: 12px;
+        }
+        
+        .slide-companies .company-description {
+            font-size: 18px;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        /* SLIDE 10 - CTA */
+        .slide-cta {
+            background: linear-gradient(135deg, #1a237e 0%, #0d47a1 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 80px 80px 120px 80px;
+        }
+        
+        .slide-cta .question {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 50px;
+            line-height: 1.3;
+        }
+        
+        .slide-cta .options {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .slide-cta .option {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 20px;
+            padding: 40px 50px;
+            font-size: 32px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+        
+        .slide-cta .cta-text {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        
+        .slide-cta .hashtags {
+            margin-top: 40px;
+            font-size: 16px;
+            opacity: 0.8;
+            line-height: 1.8;
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .slide {
+                width: 100%;
+                height: auto;
+                min-height: 100vh;
+            }
+            
+            .slide-footer {
+                position: relative;
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .footer-right {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .slide-risks .risks-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .slide-risks .header h2 {
+                font-size: 36px;
+            }
+            
+            .slide-risks .risk-card {
+                padding: 25px;
+                min-height: auto;
+            }
+            
+            .slide-companies .companies-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .slide-cta .options {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .slide-cta .option {
+                width: 100%;
+            }
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .slide {
+                box-shadow: none;
+                margin: 0;
+            }
+        }
+        /* ============================================
+   ESTILOS DEL FOOTER PROFESIONAL
+   ============================================ */
+
+.global-footer {
+    background: linear-gradient(135deg, #1a237e 0%, #0d47a1 50%, #01579b 100%);
+    color: white;
+    padding: 80px 0 40px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.global-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid-footer" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid-footer)"/></svg>');
+    opacity: 0.5;
+}
+
+.footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 60px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Sección Superior */
+.footer-top {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 60px;
+}
+
+.footer-brand {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.avatar-large {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 42px;
+    font-weight: 900;
+    border: 5px solid rgba(255,255,255,0.3);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+}
+
+.brand-info h2 {
+    font-size: 36px;
+    font-weight: 900;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.brand-title {
+    font-size: 18px;
+    opacity: 0.95;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.brand-tagline {
+    font-size: 16px;
+    opacity: 0.85;
+    font-style: italic;
+}
+
+.footer-cta h3 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.footer-cta p {
+    font-size: 16px;
+    line-height: 1.6;
+    opacity: 0.9;
+    margin-bottom: 25px;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn-primary, .btn-secondary {
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.btn-primary {
+    background: white;
+    color: #1a237e;
+    box-shadow: 0 5px 20px rgba(255,255,255,0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(255,255,255,0.4);
+}
+
+.btn-secondary {
+    background: rgba(255,255,255,0.15);
+    color: white;
+    border: 2px solid white;
+    backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover {
+    background: rgba(255,255,255,0.25);
+    transform: translateY(-3px);
+}
+
+/* Divisor */
+.footer-divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
+    margin: 50px 0;
+}
+
+/* Sección Media */
+.footer-middle {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    margin-bottom: 50px;
+}
+
+.footer-column h4 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #fff;
+    border-bottom: 2px solid rgba(255,255,255,0.3);
+    padding-bottom: 10px;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-column ul li {
+    font-size: 14px;
+    line-height: 2;
+    opacity: 0.9;
+    transition: all 0.3s ease;
+}
+
+.footer-column ul li:hover {
+    opacity: 1;
+    transform: translateX(5px);
+}
+
+/* Sección de Hashtags */
+.footer-social-section {
+    margin-bottom: 50px;
+}
+
+.hashtags-container h4 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.hashtags-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+}
+
+.hashtag {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    border: 1px solid rgba(255,255,255,0.3);
+    transition: all 0.3s ease;
+}
+
+.hashtag:hover {
+    background: rgba(255,255,255,0.25);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Sección Inferior */
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-bottom-left {
+    flex: 1;
+}
+
+.copyright {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.disclaimer {
+    font-size: 13px;
+    line-height: 1.8;
+    opacity: 0.85;
+}
+
+.footer-bottom-right {
+    flex-shrink: 0;
+}
+
+.stats-badge {
+    display: flex;
+    gap: 30px;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    padding: 25px 35px;
+    border-radius: 20px;
+    border: 2px solid rgba(255,255,255,0.2);
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 32px;
+    font-weight: 900;
+    color: #43e97b;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 12px;
+    opacity: 0.9;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Mensaje Final */
+.footer-final-message {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    padding: 25px 40px;
+    border-radius: 15px;
+    border-left: 5px solid #43e97b;
+    margin-bottom: 30px;
+}
+
+.footer-final-message p {
+    font-size: 15px;
+    line-height: 1.8;
+    margin: 0;
+}
+
+/* Firma Digital */
+.footer-signature {
+    text-align: center;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+}
+
+.footer-signature p {
+    font-size: 14px;
+    opacity: 0.8;
+    margin-bottom: 8px;
+}
+
+.tech-stack {
+    font-size: 12px;
+    opacity: 0.6;
+    font-style: italic;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 1200px) {
+    .footer-middle {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-container {
+        padding: 0 30px;
+    }
+    
+    .footer-top {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .footer-brand {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .footer-middle {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+    }
+    
+    .stats-badge {
+        width: 100%;
+        justify-content: space-around;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+    }
+    
+    .btn-primary, .btn-secondary {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .hashtags-grid {
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 480px) {
+    .global-footer {
+        padding: 50px 0 30px 0;
+    }
+    
+    .footer-container {
+        padding: 0 20px;
+    }
+    
+    .avatar-large {
+        width: 80px;
+        height: 80px;
+        font-size: 32px;
+    }
+    
+    .brand-info h2 {
+        font-size: 28px;
+    }
+    
+    .footer-cta h3 {
+        font-size: 22px;
+    }
+    
+    .stats-badge {
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+    }
+    
+    .footer-column h4 {
+        font-size: 16px;
+    }
+    
+    .footer-column ul li {
+        font-size: 13px;
+    }
+}
+
+/* Animaciones */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.footer-container > * {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Print Styles */
+@media print {
+    .global-footer {
+        background: #1a237e;
+        color: white;
+    }
+    
+    .btn-primary, .btn-secondary {
+        border: 2px solid white;
+    }
+}
+
+    </style>
+</head>
+<body>
+    
+    <!-- SLIDE 1: PORTADA -->
+    <div class="slide slide-1">
+        <div class="icon">🤖</div>
+        <h1>IA en Seguridad Física</h1>
+        <p class="subtitle">¿Revolución o Riesgo Calculado?</p>
+        <div class="year-badge">📊 Análisis 2025</div>
+        
+        <div class="slide-footer">
+            <div class="footer-left">
+                <div class="footer-avatar">MC</div>
+                <div class="footer-info">
+                    <h4>Mauro Cepeda</h4>
+                    <p>Expert Analyst in Risk Management, Security & Retail</p>
+                </div>
+            </div>
+            <div class="footer-right">
+                <div class="footer-slide-number">1/10</div>
+                <div class="footer-social">
+                    <span>💼 LinkedIn</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- SLIDE 2: ESTADÍSTICA IMPACTANTE -->
+    <div class="slide slide-2">
+        <div class="big-number">44.9%</div>
+        <div class="stat-label">de los delitos en Colombia</div>
+        <p class="description">
+            Son hurtos a personas. ¿Podríamos prevenirlos con IA?<br><br>
+            La respuesta está en los datos.
+        </p>
+        
+        <div class="slide-footer">
+            <div class="footer-left">
+                <div class="footer-avatar">MC</div>
+                <div class="footer-info">
+                    <h4>Mauro Cepeda</h4>
+                    <p>Expert Analyst in Risk Management, Security & Retail</p>
+                </div>
+            </div>
+            <div class="footer-right">
+                <div class="footer-slide-number">2/10</div>
+                <div class="footer-social">
+                    <span>#SecurityAnalytics</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- SLIDE 3: APLICACIÓN 1 -->
+    <div class="slide slide-app">
+        <div class="header">
+            <div class="number">1️⃣</div>
+            <div class="title">VIGILANCIA INTELIGENTE</div>
+        </div>
+        <div class="content">
+            <div class="item">
+                <div class="item-icon">📹</div>
+                <div class="item-text">
+                    <div class="item-title">Análisis en Tiempo Real</div>
+                    <div class="item-description">Procesa video instantáneamente para detectar comportamientos sospechosos</div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="item-icon">🎯</div>
+                <div class="item-text">
+                    <div class="item-title">Reducción de Falsos Positivos</div>
+                    <div class="item-description">87% menos alarmas innecesarias vs. sistemas tradicionales</div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="item-icon">✈️</div>
+                <div class="item-text">
+                    <div class="item-title">Caso Real: Aeropuerto El Dorado</div>
+                    <div class="item-description">Reducción del 34% en incidentes de seguridad tras implementación</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div class="footer-left">
+                <div class="footer-avatar">MC</div>
+                <div class="footer-info">
+                    <h4>Mauro Cepeda</h4>
+                    <p>Expert Analyst in Risk Management, Security & Retail</p>
+                </div>
+            </div>
+            <div class="footer-right">
+                <div class="footer-slide-number">3/10</div>
+                <div class="footer-social">
+                    <span>#IAResponsable</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- SLIDE 4: APLICACIÓN 2 -->
+    <div class="slide slide-app">
+        <div class="header">
+            <div class="number">2️⃣</div>
+            <div class="title">CONTROL DE ACCESO</div>
+        </div>
+        <div class="content">
+            <div class="item">
+                <div class="item-icon">👤</div>
+                <div class="item-text">
+                    <div class="item-title">Reconocimiento Facial</div>
+                    <div class="item-description">Verificación biométrica multimodal sin contacto físico</div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="item-icon">⚡</div>
+                <div class="item-text">
+                    <div class="item-title">Velocidad de Verificación</div>
+                    <div class="item-description">Menos de 0.3 segundos por persona</div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="item-icon">✅</div>
+                <div class="item-text">
+                    <div class="item-title">Precisión</div>
+                    <div class="item-description">99.7% de tasa de acierto en condiciones óptimas</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div class="footer-left">
+                <div class="footer-avatar">MC</div>
+                <div class="footer-info">
+                    <h4>Mauro Cepeda</h4>
+                    <p>Expert Analyst in Risk Management, Security & Retail</p>
+                </div>
+            </div>
+            <div class="footer-right">
+                <div class="footer-slide-number">4/10</div>
+                <div class="footer-social">
+                    <span>#RiskManagement</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- SLIDE 5: APLICACIÓN 3 -->
+    <div class="slide slide-app">
+        <div class="header">
+            <div class="number">3️⃣</div>
+            <div class="title">PREDICCIÓN DE RIESGOS</div>
+        </div>
+        <div class="content">
+            <div class="item">
+                <div class="item-icon">📊</div>
+                <div class="item-text">
+                    <div class="item-title">Análisis de Patrones</div>
+                    <div class="item-description">Identifica zonas y horarios de mayor riesgo basado en datos históricos</div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="item-icon">🛡️</div>
+                <div class="item-text">
+                    <div class="item-title">Optimización de Recursos</div>
+                    <div class="item-description">Asigna personal de seguridad donde más se necesita</div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="item-icon">📉</div>
+                <div class="item-text">
+                    <div class="item-title">Resultados en Retail</div>
+                    <div class="item-description">42% de reducción en pérdidas por hurto</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div class="footer-left">
+                <div class="footer-avatar">MC</div>
+                <div class="footer-info">
+                    <h4>Mauro Cepeda</h4>
+                    <p>Expert Analyst in Risk Management, Security & Retail</p>
+                </div>
+            </div>
+            <div class="footer-right">
+                <div class="footer-slide-number">5/10</div>
+                <div class="footer-social">
+                    <span>#RetailSecurity</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- SLIDE 6: APLICACIÓN 4 -->
+    <div class="slide slide-app">
+        <div class="header">
+            <div class="number">4️⃣</div>
+            <div class="title">ALERTA TEMPRANA</div>
+        </div>
+        <div class="content">
+            <div class="item">
+                <div class="item-icon">🌐</div>
+                <div class="item-text">
+                    <div class="item-title">Monitoreo de Redes Sociales</div>
+                    <div class="item-description">Análisis de texto para detectar amenazas potenciales</div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="item-icon">🚨</div>
+                <div class="item-text">
+                    <div class="item-title">Integración con Autoridades</div>
+                    <div class="item-description">Notificación automática a fuerzas de seguridad</div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="item-icon">⏱️</div>
+                <div class="item-text">
+                    <div class="item-title">Tiempo de Respuesta</div>
+                    <div class="item-description">65% más rápido que métodos tradicionales</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div class="footer-left">
+                <div class="footer-avatar">MC</div>
+                <div class="footer-info">
+                    <h4>Mauro Cepeda</h4>
+                    <p>Expert Analyst in Risk Management, Security & Retail</p>
+                </div>
+            </div>
+            <div class="footer-right">
+                <div class="footer-slide-number">6/10</div>
+                <div class="footer-social">
+                    <span>#DataDriven</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- SLIDE 7: RIESGOS (RESPONSIVE MEJORADO) -->
+    <div class="slide slide-risks">
+        <div class="header">
+            <h2>⚠️ NO TODO ES PERFECTO</h2>
+            <p>4 Riesgos Reales que Debes Conocer</p>
+        </div>
+        <div class="risks-grid">
+            <div class="risk-card">
+                <div class="risk-icon">🔴</div>
+                <div class="risk-title">Sesgos Algorítmicos</div>
+                <div class="risk-text">
+                    Estudio MIT: 34% error en reconocimiento facial de personas afrodescendientes vs. 0.8% en caucásicos
+                </div>
+            </div>
+            <div class="risk-card">
+                <div class="risk-icon">❌</div>
+                <div class="risk-title">Falsos Positivos</div>
+                <div class="risk-text">
+                    Pueden resultar en detenciones injustificadas y violación de derechos fundamentales
+                </div>
+            </div>
+            <div class="risk-card">
+                <div class="risk-icon">🔒</div>
+                <div class="risk-title">Privacidad</div>
+                <div class="risk-text">
+                    Colombia aún no tiene regulación clara sobre uso de IA en espacios públicos
+                </div>
+            </div>
+            <div class="risk-card">
+                <div class="risk-icon">⚙️</div>
+                <div class="risk-title">Dependencia Tecnológica</div>
+                <div class="risk-text">
+                    ¿Qué sucede cuando el sistema falla? ¿Existen protocolos de respaldo?
+                </div>
+            </div>
+        </div>
+    </div>    
+       
+    
+    <!-- SLIDE 8: RECOMENDACIONES -->
+    <div class="slide slide-recommendations">
+        <div class="header">
+            <h2>🎯 3 RECOMENDACIONES CLAVE</h2>
+        </div>
+        <div class="rec-list">
+            <div class="rec-item">
+                <div class="rec-number">1</div>
+                <div class="rec-content">
+                    <h3>AUDITORÍA CONSTANTE</h3>
+                    <p>Revisar sesgos cada 3 meses • Validar precisión con casos reales • Ajustar según contexto local</p>
+                </div>
+            </div>
+            <div class="rec-item">
+                <div class="rec-number">2</div>
+                <div class="rec-content">
+                    <h3>ENFOQUE HÍBRIDO</h3>
+                    <p>IA para detección • Humanos para decisión final • Protocolos claros de escalamiento</p>
+                </div>
+            </div>
+            <div class="rec-item">
+                <div class="rec-number">3</div>
+                <div class="rec-content">
+                    <h3>TRANSPARENCIA TOTAL</h3>
+                    <p>Informar sobre uso de IA • Canales de apelación • Publicar métricas de desempeño </p>
+                </div>
+            </div>     
+        </div>
+    </div>
+
+    <!-- ============================================
+     FOOTER PROFESIONAL GLOBAL
+     ============================================ -->
+<footer class="global-footer">
+    <div class="footer-container">
+        <!-- Sección Superior -->
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div class="brand-icon">
+                    <div class="avatar-large">MC</div>
+                </div>
+                <div class="brand-info">
+                    <h2>Mauro Cepeda</h2>
+                    <p class="brand-title">Expert Analyst in Risk Management, Security & Retail</p>
+                    <p class="brand-tagline">🎯 Transformando Datos en Decisiones Estratégicas</p>
+                </div>
+            </div>
+            
+            <div class="footer-cta">
+                <h3>¿Interesado en Análisis de Seguridad con IA?</h3>
+                <p>Conectemos para discutir estrategias de seguridad inteligente y gestión de riesgos basada en datos.</p>
+                <div class="cta-buttons">
+                    <a href="www//linkedin.com/in/mauro-fernando-cepeda-9b7500168" class="btn-primary" target="_blank">
+                        💼 Conectar en LinkedIn
+                    </a>
+                    <a href="maurofernandocepeda@gmail.com" class="btn-secondary">
+                        ✉️ Contactar por Email
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Divisor -->
+        <div class="footer-divider"></div>
+        
+        <!-- Sección Media -->
+        <div class="footer-middle">
+            <div class="footer-column">
+                <h4>📊 Áreas de Expertise</h4>
+                <ul>
+                    <li>• Inteligencia Artificial en Seguridad</li>
+                    <li>• Análisis de Datos de Criminalidad</li>
+                    <li>• Gestión de Riesgos Corporativos</li>
+                    <li>• Security Intelligence & Analytics</li>
+                    <li>• Retail Loss Prevention</li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h4>🛠️ Herramientas & Skills</h4>
+                <ul>
+                    <li>• Power BI & Data Visualization</li>
+                    <li>• Google Suite & BigQuery</li>
+                    <li>• Excel Advanced & VBA</li>
+                    <li>• Python for Data Analysis</li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h4>📈 Servicios Profesionales</h4>
+                <ul>
+                    <li>• Consultoría en Seguridad con IA</li>
+                    <li>• Análisis de Tendencias Criminales</li>
+                    <li>• Desarrollo de Dashboards</li>
+                    <li>• Capacitación Corporativa</li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h4>🌟 Proyectos Destacados</h4>
+                <ul>
+                    <li>• Análisis Criminalidad Colombia 2025</li>
+                    <li>• Implementación IA en Retail</li>
+                    <li>• Sistemas de Alerta Temprana</li>
+                    <li>• Optimización de Rondas de Seguridad</li>
+                    <li>• Predicción de Riesgos con ML</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Divisor -->
+        <div class="footer-divider"></div>
+        
+        <!-- Sección de Hashtags y Redes -->
+        <div class="footer-social-section">
+            <div class="hashtags-container">
+                <h4>🔖 Temas de Interés</h4>
+                <div class="hashtags-grid">
+                    <span class="hashtag">#InteligenciaArtificial</span>
+                    <span class="hashtag">#SeguridadFísica</span>
+                    <span class="hashtag">#RiskManagement</span>
+                    <span class="hashtag">#SecurityAnalytics</span>
+                    <span class="hashtag">#IAResponsable</span>
+                    <span class="hashtag">#DataDriven</span>
+                    <span class="hashtag">#RetailSecurity</span>
+                    <span class="hashtag">#Ciberseguridad</span>
+                    <span class="hashtag">#Innovation</span>
+                    <span class="hashtag">#Colombia</span>
+                    <span class="hashtag">#TechForGood</span>
+                    <span class="hashtag">#SecurityIntelligence</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Divisor -->
+        <div class="footer-divider"></div>
+        
+        <!-- Sección Inferior -->
+        <div class="footer-bottom">
+            <div class="footer-bottom-left">
+                <p class="copyright">© 2025 Mauro Cepeda. Todos los derechos reservados.</p>
+                <p class="disclaimer">
+                    <strong>Fuente de Datos:</strong> Estadísticas oficiales de criminalidad en Colombia. 
+                    Este análisis tiene fines informativos y profesionales. Los datos presentados corresponden 
+                    al período enero-agosto 2025 y están sujetos a actualizaciones oficiales.
+                </p>
+            </div>
+            
+            <div class="footer-bottom-right">
+                <div class="stats-badge">
+                    <div class="stat-item">
+                        <div class="stat-number">359,023</div>
+                        <div class="stat-label">Incidentes Analizados</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">-36%</div>
+                        <div class="stat-label">Reducción 2025</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mensaje Final -->
+        <div class="footer-final-message">
+            <p>
+                🌟 <strong>¿Te resultó útil este análisis?</strong> Comparte este contenido en LinkedIn 
+                y ayuda a otros profesionales de seguridad a tomar decisiones basadas en datos. 
+                Tu apoyo hace la diferencia.
+            </p>
+        </div>
+        
+        <!-- Firma Digital -->
+        <div class="footer-signature">
+            <p>Diseñado con 💙 para la comunidad de Seguridad y Análisis de Riesgos</p>
+            <p class="tech-stack">Desarrollado con HTML5 • CSS3 • Data Visualization • AI Insights</p>
+        </div>
+    </div>
+</footer>
+
+
+
+
+</body>                
