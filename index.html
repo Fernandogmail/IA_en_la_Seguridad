@@ -13,14 +13,25 @@
             box-sizing: border-box;
         }
         
+        /* OPTIMIZACIÓN PARA PDF */
+        @page {
+            size: 1080px 1080px;
+            margin: 0;
+        }
+        
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
         body {
             font-family: 'Inter', sans-serif;
-            background: #f0f0f0;
-            padding: 20px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
+            background: #ffffff;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+            color-adjust: exact !important;
         }
         
         .slide {
@@ -29,20 +40,20 @@
             background: white;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
             page-break-after: always;
+            page-break-inside: avoid;
             display: flex;
             flex-direction: column;
+            margin: 0 auto;
         }
         
-        /* FOOTER PROFESIONAL */
+        /* FOOTER EN CADA SLIDE */
         .slide-footer {
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
-            background: rgba(26, 35, 126, 0.95);
-            backdrop-filter: blur(10px);
+            background: #1a237e;
             color: white;
             padding: 20px 40px;
             display: flex;
@@ -69,17 +80,20 @@
             font-size: 24px;
             font-weight: 700;
             border: 3px solid white;
+            color: white;
         }
         
         .footer-info h4 {
             font-size: 16px;
             font-weight: 700;
             margin-bottom: 3px;
+            color: white;
         }
         
         .footer-info p {
             font-size: 11px;
             opacity: 0.9;
+            color: white;
         }
         
         .footer-right {
@@ -94,6 +108,7 @@
             background: rgba(255,255,255,0.15);
             padding: 8px 16px;
             border-radius: 20px;
+            color: white;
         }
         
         .footer-social {
@@ -104,6 +119,7 @@
         
         .footer-social span {
             opacity: 0.9;
+            color: white;
         }
         
         /* SLIDE 1 - PORTADA */
@@ -116,23 +132,11 @@
             align-items: center;
             text-align: center;
             padding: 80px 80px 120px 80px;
-            position: relative;
-        }
-        
-        .slide-1::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
         }
         
         .slide-1 .icon {
             font-size: 120px;
             margin-bottom: 40px;
-            position: relative;
             z-index: 1;
         }
         
@@ -142,32 +146,30 @@
             font-weight: 900;
             margin-bottom: 30px;
             line-height: 1.1;
-            position: relative;
             z-index: 1;
+            color: white;
         }
         
         .slide-1 .subtitle {
             font-size: 32px;
             font-weight: 300;
             margin-bottom: 60px;
-            opacity: 0.95;
-            position: relative;
             z-index: 1;
+            color: white;
         }
         
         .slide-1 .year-badge {
             background: rgba(255,255,255,0.2);
-            backdrop-filter: blur(10px);
             padding: 15px 40px;
             border-radius: 50px;
             font-size: 20px;
             font-weight: 600;
             border: 2px solid rgba(255,255,255,0.3);
-            position: relative;
             z-index: 1;
+            color: white;
         }
         
-        /* SLIDE 2 - ESTADÍSTICA IMPACTANTE */
+        /* SLIDE 2 - ESTADÍSTICA */
         .slide-2 {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -184,23 +186,24 @@
             font-weight: 900;
             line-height: 1;
             margin-bottom: 40px;
-            text-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            color: white;
         }
         
         .slide-2 .stat-label {
             font-size: 48px;
             font-weight: 700;
             margin-bottom: 60px;
+            color: white;
         }
         
         .slide-2 .description {
             font-size: 28px;
             line-height: 1.6;
             max-width: 800px;
-            opacity: 0.95;
+            color: white;
         }
         
-        /* SLIDE 3-6 - APLICACIONES */
+        /* SLIDES 3-6 - APLICACIONES */
         .slide-app {
             padding: 60px 80px 120px 80px;
             background: white;
@@ -218,11 +221,13 @@
             font-size: 80px;
             font-weight: 900;
             margin-bottom: 20px;
+            color: white;
         }
         
         .slide-app .title {
             font-size: 48px;
             font-weight: 700;
+            color: white;
         }
         
         .slide-app .content {
@@ -263,7 +268,7 @@
             line-height: 1.5;
         }
         
-        /* SLIDE 7 - RIESGOS (RESPONSIVE MEJORADO) */
+        /* SLIDE 7 - RIESGOS */
         .slide-risks {
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             color: white;
@@ -280,23 +285,22 @@
             font-weight: 900;
             margin-bottom: 15px;
             line-height: 1.2;
+            color: white;
         }
         
         .slide-risks .header p {
             font-size: 24px;
-            opacity: 0.95;
+            color: white;
         }
         
         .slide-risks .risks-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 25px;
-            max-width: 100%;
         }
         
         .slide-risks .risk-card {
             background: rgba(255,255,255,0.15);
-            backdrop-filter: blur(10px);
             border: 2px solid rgba(255,255,255,0.3);
             border-radius: 20px;
             padding: 30px;
@@ -315,13 +319,14 @@
             font-weight: 700;
             margin-bottom: 12px;
             line-height: 1.2;
+            color: white;
         }
         
         .slide-risks .risk-text {
             font-size: 16px;
             line-height: 1.5;
-            opacity: 0.95;
             flex-grow: 1;
+            color: white;
         }
         
         /* SLIDE 8 - RECOMENDACIONES */
@@ -340,6 +345,7 @@
             font-size: 56px;
             font-weight: 900;
             margin-bottom: 20px;
+            color: #1a237e;
         }
         
         .slide-recommendations .rec-list {
@@ -369,6 +375,7 @@
             font-size: 28px;
             font-weight: 700;
             margin-bottom: 12px;
+            color: #1a237e;
         }
         
         .slide-recommendations .rec-content p {
@@ -395,6 +402,7 @@
         .slide-companies .header h2 {
             font-size: 48px;
             font-weight: 900;
+            color: white;
         }
         
         .slide-companies .companies-grid {
@@ -440,6 +448,7 @@
             font-weight: 700;
             margin-bottom: 50px;
             line-height: 1.3;
+            color: white;
         }
         
         .slide-cta .options {
@@ -452,85 +461,55 @@
         
         .slide-cta .option {
             background: rgba(255,255,255,0.15);
-            backdrop-filter: blur(10px);
             border: 3px solid rgba(255,255,255,0.3);
             border-radius: 20px;
             padding: 40px 50px;
             font-size: 32px;
             font-weight: 700;
-            transition: all 0.3s ease;
+            color: white;
         }
         
         .slide-cta .cta-text {
             font-size: 28px;
             margin-bottom: 20px;
+            color: white;
         }
         
         .slide-cta .hashtags {
             margin-top: 40px;
             font-size: 16px;
-            opacity: 0.8;
             line-height: 1.8;
+            color: white;
         }
         
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .slide {
-                width: 100%;
-                height: auto;
-                min-height: 100vh;
-            }
-            
-            .slide-footer {
-                position: relative;
-                padding: 15px 20px;
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .footer-right {
-                width: 100%;
-                justify-content: space-between;
-            }
-            
-            .slide-risks .risks-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .slide-risks .header h2 {
-                font-size: 36px;
-            }
-            
-            .slide-risks .risk-card {
-                padding: 25px;
-                min-height: auto;
-            }
-            
-            .slide-companies .companies-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .slide-cta .options {
-                flex-direction: column;
-                width: 100%;
-            }
-            
-            .slide-cta .option {
-                width: 100%;
-            }
-        }
-        
+        /* ESTILOS PARA IMPRESIÓN PDF */
         @media print {
+            html, body {
+                width: 1080px;
+                height: 1080px;
+                margin: 0;
+                padding: 0;
+            }
+            
             body {
                 background: white;
-                padding: 0;
             }
             
             .slide {
                 box-shadow: none;
                 margin: 0;
+                page-break-after: always;
+                page-break-inside: avoid;
+            }
+            
+            /* Forzar colores en PDF */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
             }
         }
+    
         /* ============================================
    ESTILOS DEL FOOTER PROFESIONAL
    ============================================ */
